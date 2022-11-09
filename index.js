@@ -7,6 +7,7 @@ const cors = require("cors")
 const app = express()
 const swaggerUi = require('swagger-ui-express')
 const mongoose = require('mongoose')
+// var http = require('http');
 
 const swaggerDocument = require('./swagger.json')
 
@@ -51,8 +52,14 @@ app.use('/projects', projects)
 app.use('/favourites', favourites)
 app.use('/thumbnails', thumbnails)
 
-app.listen(PORT, () => console.log('server started'))
+app.listen(80, () => console.log('server started'))
 
+
+//create a server object:
+// http.createServer(function (req, res) {
+//   res.write('A Monk in Cloud'); //write a response to the client
+//   res.end(); //end the response
+// }).listen(80); //the server object listens on port 80
 
 // getAllStates.get('/', async (req, res) => { 
 //   try {
