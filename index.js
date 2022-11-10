@@ -52,7 +52,7 @@ app.use('/projects', projects)
 app.use('/favourites', favourites)
 app.use('/thumbnails', thumbnails)
 
-app.listen(80, () => console.log('server started'))
+app.listen(PORT, () => console.log('server started'))
 
 
 //create a server object:
