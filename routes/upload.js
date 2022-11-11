@@ -55,7 +55,7 @@ uploading.post('/:userId', (req, res) => {
         if(req.file == undefined){
             res.status(402).json({ errors: ['No file selectd'] })
         } else {
-            const thumbnail = req.file.path.replace('public', 'https://sell3cart.herokuapp.com');
+            const thumbnail = req.file.path.replace('public', 'http://node-env.eba-xnwspbk7.ap-northeast-1.elasticbeanstalk.com');
             res.send(thumbnail);
         }
       }
@@ -64,7 +64,7 @@ uploading.post('/:userId', (req, res) => {
 
   uploading.delete('/delete', (req, res) => {
     const { url } = req.query;
-    const path = url.replace('https://sell3cart.herokuapp.com', 'public')
+    const path = url.replace('http://node-env.eba-xnwspbk7.ap-northeast-1.elasticbeanstalk.com', 'public')
     fs.unlink(path, (err) => {
       if (err) {
         res.status(400).json({ error: 'something went wrong' })
