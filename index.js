@@ -23,8 +23,8 @@ const categories = require('./routes/categories')
 const favourites = require('./routes/favourites')
 const thumbnails = require('./routes/thumbnails')
 dotenv.config({path: './config.env'});
-// const PORT = 3000 || process.env.PORT;
-const PORT = 3000;
+const PORT = process.env.PORT;
+// const PORT = 3000;
 
 mongoose.connect('mongodb+srv://Harpinder0:harpindersingh@cluster0.vl3kis6.mongodb.net/sell3cart?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => console.log('I am connected'))
