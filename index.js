@@ -12,7 +12,10 @@ const mongoose = require('mongoose')
 const swaggerDocument = require('./swagger.json')
 
 const loginRouter = require('./routes/login')
+const jobs = require('./routes/jobs')
+const jobShare = require('./routes/jobShare')
 const user = require('./routes/user')
+// const account = require('./routes/account')
 const uploadApi = require('./routes/upload');
 const getAllStates = require('./routes/states')
 const projects = require('./routes/projects')
@@ -20,7 +23,8 @@ const categories = require('./routes/categories')
 const favourites = require('./routes/favourites')
 const thumbnails = require('./routes/thumbnails')
 dotenv.config({path: './config.env'});
-const PORT = process.env.PORT;
+// const PORT = 3000 || process.env.PORT;
+const PORT = 3000;
 
 mongoose.connect('mongodb+srv://Harpinder0:harpindersingh@cluster0.vl3kis6.mongodb.net/sell3cart?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
   .then(() => console.log('I am connected'))
@@ -45,9 +49,12 @@ app.use(express.static('public'));
 
 app.use('/login', loginRouter)
 app.use('/user', user)
+// app.use('/account', account)
 app.use('/upload', uploadApi)
 app.use('/categories', categories)
 app.use('/states', getAllStates)
+app.use('/jobs', jobs)
+app.use('/job/applications', jobShare)
 app.use('/projects', projects)
 app.use('/favourites', favourites)
 app.use('/thumbnails', thumbnails)
