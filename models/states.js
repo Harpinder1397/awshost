@@ -11,8 +11,6 @@ const requiredNumberObj = {
 }
 
 const statesInfoSchema = new Schema({
-    id: requiredNumberObj,
-    _id: requiredStringDefObj,
     name: requiredStringDefObj,
     state: requiredStringDefObj,
 })

@@ -4,9 +4,10 @@ const jobShare = Router()
 
 const { JobShare } = require('../models/jobShare')
 
-jobShare.get('/', async (req, res) => { 
+jobShare.get('/:id', async (req, res) => {
+  const { id } = req.params;
   try {
-      const response = await JobShare.find();
+      const response = await JobShare.find({sharedTo: id});
      return res.status(200).json(response)
     }
    catch (error) {
