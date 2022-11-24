@@ -21,6 +21,7 @@ const optionalFieldString = {
 };
 
 const jobsInfoSchema = new Schema({
+  thumbnail:optionalFieldArray,
   jobId: requiredStringDefObj,
   jobTitle: requiredStringDefObj,
   postedById: requiredStringDefObj,
