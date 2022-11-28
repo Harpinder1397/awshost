@@ -20,6 +20,11 @@ const optionalFieldString = {
   type: String,
 };
 
+const optionalFieldBoolean = {
+  required : false, 
+  type: Boolean
+}
+
 const jobShareInfoSchema = new Schema({
   sharedById: requiredStringDefObj,
   sharedByName: requiredStringDefObj,
@@ -30,7 +35,8 @@ const jobShareInfoSchema = new Schema({
   jobId: requiredStringDefObj,
   jobTitle: requiredStringDefObj,
   appliedDate: requiredStringDefObj,
-  jobExpired: requiredStringDefObj
+  jobExpired: requiredStringDefObj,
+  status: optionalFieldBoolean
 })
 
 const JobShare = new model("applications", jobShareInfoSchema);
