@@ -72,7 +72,7 @@ jobs.post("/", async (req, res) => {
     //     }
     //   }
     // })
-    const newJob = {...req.body, postedOn: new Date()};
+    const newJob = {...req.body, postedOn: new Date(), status: false};
     Jobs.create(
       newJob, (err, users) => {
         if (err) {

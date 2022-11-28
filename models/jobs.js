@@ -20,6 +20,11 @@ const optionalFieldString = {
   type: String,
 };
 
+const optionalFieldBoolean = {
+  required : false, 
+  type: Boolean
+}
+
 const jobsInfoSchema = new Schema({
   thumbnail:optionalFieldArray,
   jobId: requiredStringDefObj,
@@ -31,6 +36,7 @@ const jobsInfoSchema = new Schema({
   postedTill: requiredStringDefObj,
   requirement: requiredNumberObj,
   content: requiredStringDefObj,
+  status: optionalFieldBoolean,
 })
 
 const Jobs = new model("jobs", jobsInfoSchema);
