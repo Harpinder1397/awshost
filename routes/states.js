@@ -5,15 +5,12 @@ const getAllStates = Router()
 const { States } = require('../models/states')
 
 getAllStates.get('/', async (req, res) => { 
-  let response = [];
+
+  const name = req.query.name && {name: {$regex: req.query.name, $options: "i"}}
+  const state = req.query.state && {'state': new RegExp('^' + req.query.state + '$', 'i')};
+  const query = {...name, ...state}
   try {
-    if (req.query.name) {
-      response = await States.find({name: new RegExp('^' + req.query.name + '$', 'i')});
-    } else if (req.query.state) {
-      response = await States.find({state: new RegExp('^' + req.query.state + '$', 'i')});
-    } else {
-      response = await States.find()
-    }
+    const response = await States.find(query);
     return res.status(200).json(response)
   } catch (error) {
     return res.status(502).json({ errors: ['Some error occurred'] })
