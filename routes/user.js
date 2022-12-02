@@ -136,24 +136,49 @@ user.get('/', async (req, res) => {
   const city = req.query.city && {'city': new RegExp('^' + req.query.city + '$', 'i')};
   const state = req.query.state && {'state': new RegExp('^' + req.query.state + '$', 'i')};
   // const userName = req.query.userName && {'userName': new RegExp('^' + req.query.userName.split(",") + '$', 'i')};
-  const fullName = req.query.fullName && {'userName': new RegExp('^' + req.query.fullName + '$', 'i')};
+  const fullName = req.query.fullName && {fullName: {$regex: req.query.fullName, $options: "i"}}
+  const page = parseInt(req.query.page) - 1 || 0;
+	const limit = parseInt(req.query.limit) || 9;
+  
+
+  // sort 
+  // req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
+	// 	let sortBy = {};
+	// 	if (sort[1]) {
+	// 		sortBy[sort[0]] = sort[1];
+	// 	} else {
+	// 		sortBy[sort[0]] = "asc";
+	// 	}
 
   // all object add one object
-  const query = {
-    ...gender, ...age, ...experience, ...languages,
-    ...category, ...subCategory, ...tags, ...city,
-    ...state, ...fullName
-  }
+
+  // const movies = await Movie.find({ name: { $regex: search, $options: "i" } })
+	// 		.where("genre")
+	// 		.in([...genre])
+	// 		.sort(sortBy)
+	// 		.skip(page * limit)
+	// 		.limit(limit);
+
+    const query = {
+      ...gender, ...age, ...experience, ...languages,
+      ...category, ...subCategory, ...tags, ...city,
+      ...state, ...fullName
+    }
+    const total = await User.countDocuments();
 
   try {
-    const users = await User.find(query);
-    return res.status(200).json(
-      users
-    )
+    const users = await User.find(query)
+    .skip(page * limit)
+    .limit(limit);;
+    return res.status(200).json({
+      users,
+      total
+  })
   } catch (error) {
     return res.status(502).json({ errors: error })
   }
 })
+
 
 user.get('/:userId', async (req, res) => {
   let token = req.headers['authorization'];

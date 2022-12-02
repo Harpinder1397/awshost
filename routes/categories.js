@@ -63,7 +63,6 @@ categories.post('/:_id', (req, res) => {
 
 categories.delete('/:_id', (req, res) => {
   const { _id = "",  } = req.params
-  console.log(_id, "id")
 
   try {
     Categories.findOneAndDelete({ _id })
@@ -92,7 +91,6 @@ categories.post('/:_id/subCategory', (req, res) => {
 
 categories.post('/:_id/tags', (req, res) => {
   const { _id = "",  } = req.params
-  console.log('tags', req.body, _id);
   try {
     
     Categories.findByIdAndUpdate({_id}, {$set:{

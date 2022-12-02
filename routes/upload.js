@@ -47,7 +47,6 @@ const storage = multer.diskStorage({
 //   app.get('/', (req, res) => res.render('index'));
   
 uploading.post('/:userId', (req, res) => {
-  console.log(req, 'req.file.path')
   const { userId } = req.params;
     upload(req, res, (err) => {
       if(err){

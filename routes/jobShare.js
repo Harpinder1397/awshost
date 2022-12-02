@@ -4,10 +4,20 @@ const jobShare = Router()
 
 const { JobShare } = require('../models/jobShare')
 
+jobShare.get('/', async (req, res) => {
+  try {
+    const response = await JobShare.find();
+     return res.status(200).json(response)
+    }
+   catch (error) {
+    return res.status(502).json({ errors: ['Some error occurred'] })
+  }
+})
+
 jobShare.get('/:id', async (req, res) => {
   const { id } = req.params;
   try {
-      const response = await JobShare.find({sharedTo: id});
+    const response = await JobShare.find({sharedTo: id});
      return res.status(200).json(response)
     }
    catch (error) {
@@ -18,6 +28,16 @@ jobShare.get('/:id', async (req, res) => {
 jobShare.post("/", async (req, res) => {
   try {
     const newJob = {...req.body, postedOn: new Date()};
+
+    const jobId = req.body.jobId && {'jobId': req.body.jobId};
+    const sharedById = req.body.sharedById && {'sharedById': req.body.sharedById};
+    const query = {...jobId, ...sharedById}
+    const checkAlreadyAppliedJob = await JobShare.findOne(query);
+    
+    if(checkAlreadyAppliedJob){
+     return res.status(502).json({error: 'You already applied this job.'})
+    }
+
     JobShare.create(
       newJob, (err, users) => {
         if (err) {

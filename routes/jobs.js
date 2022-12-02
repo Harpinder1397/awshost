@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const multer = require('multer');
 const path = require('path');
-
+const moment = require('moment')
 const jobs = Router()
 
 const { Jobs } = require('../models/jobs')
@@ -40,10 +40,19 @@ function checkFileType(file, cb){
 // image upload end
 
 jobs.get('/', async (req, res) => { 
+
+  const page = parseInt(req.query.page) - 1 || 0;
+  const limit = parseInt(req.query.limit) || 9;
+  const total = await Jobs.countDocuments();
+  const jobExpired = {'postedTill': {$gte: moment().format('YYYY-MM-DD')}} || '';
+
   try {
-      const response = await Jobs.find();
+      const response = await Jobs.find().skip(page * limit).limit(limit);
       console.log(response, 'response')
-     return res.status(200).json(response)
+     return res.status(200).json({
+      data: response,
+      total
+     })
     }
    catch (error) {
     return res.status(502).json({ errors: ['Some error occurred'] })
