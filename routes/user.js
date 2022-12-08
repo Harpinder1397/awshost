@@ -51,7 +51,7 @@ user.post("/", async (req, res) => {
 
   
   try {
-    const record = await User.find({userName: req.body.userName});
+    const record = await User.find({mobileNumber: req.body.mobileNumber});
     if (record.length) {
       res.status(400).json({
         errors: {
@@ -126,6 +126,11 @@ user.get('/', async (req, res) => {
   // const experience = req.query.experience && {'experience':{ $gte: Math.min.apply(null, ...req.query.experience,0) ,$lte: Math.max.apply(null, ...req.query.experience,0)}};
   // console.log([...Array(max).keys()], '[...Array(10).keys()]')
 
+  console.log(req.query.experience, 'req.query.experience')
+  const min =  req.query.experience && Math.min(...req.query.experience);
+  const max =  req.query.experience && Math.max(...req.query.experience);
+  console.log(max, 'req.query.experience 222');
+  console.log(max, 'req.query.experience');
   const experience = req.query.experience && {'experience':{ $gte: req.query.experience - 4 ,$lte: req.query.experience}};
   const age = req.query.age && {'age':{$gte: [0] ,$lte: 2}};
   const gender = req.query.gender && {'gender': req.query.gender};
@@ -168,8 +173,9 @@ user.get('/', async (req, res) => {
 
   try {
     const users = await User.find(query)
+    // .sort('asc')
     .skip(page * limit)
-    .limit(limit);;
+    .limit(limit)
     return res.status(200).json({
       users,
       total
@@ -178,7 +184,6 @@ user.get('/', async (req, res) => {
     return res.status(502).json({ errors: error })
   }
 })
-
 
 user.get('/:userId', async (req, res) => {
   let token = req.headers['authorization'];

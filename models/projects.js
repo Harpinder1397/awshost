@@ -15,6 +15,7 @@ const projectInfoSchema = new Schema({
   links: requiredStringDefObj,
   projectName: requiredStringDefObj,
   subCategory: requiredStringDefObj,
+  userId: requiredStringDefObj,
   id: requiredNumberObj
 })
 

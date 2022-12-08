@@ -4,9 +4,10 @@ const projects = Router()
 
 const { Projects } = require('../models/projects')
 
-projects.get('/', async (req, res) => { 
+projects.get('/:id', async (req, res) => { 
+  const userId = req.params.id && {'userId': req.params.id};
   try {
-    const states = await Projects.find(req.query)
+    const states = await Projects.find(userId)
     return res.status(200).json(states)
   } catch (error) {
     return res.status(502).json({ errors: ['Some error occurred'] })

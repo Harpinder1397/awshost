@@ -31,7 +31,7 @@ const optionalFieldBoolean = {
 }
 
 const userInfoSchema = new Schema({
-  userName: requiredStringDefObj,
+  mobileNumber: optionalFieldNumber,
   fullName: requiredStringDefObj,
   password: requiredStringDefObj,
   email: optionalFieldString,

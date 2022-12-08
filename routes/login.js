@@ -19,12 +19,12 @@ async function comparePassword(password, hashedPassword) {
 
 loginRouter.post("/", async (req, res) => {
   const validationErrors = validate(loginValidations, req.body)
-  const { userName, password } = req.body
+  const { mobileNumber, password } = req.body
   if (!is.empty(validationErrors)) {
     return res.status(400).json({ errors: validationErrors })
   }
   try {
-    const user = await User.findOne({ userName: userName })
+    const user = await User.findOne({ mobileNumber: mobileNumber })
     const hashedPassword = user.password
     const isPasswordMatched = await comparePassword(password, hashedPassword)
     if (user && isPasswordMatched) {

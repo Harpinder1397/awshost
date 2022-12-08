@@ -1,5 +1,5 @@
 module.exports = {
-    userName: {
+    mobileNumber: {
       required: {
         errorMsg: 'User name is required'
       }
@@ -14,14 +14,14 @@ module.exports = {
         errorMsg: 'Password is required'
       }
     },
-    dateOfBirth: {
+    category: {
       required: {
-        errorMsg: 'DOB is required'
+        errorMsg: 'category is required'
       }
     },
-    gender: {
+    subCategory: {
       required: {
-        errorMsg: 'Gender is required'
+        errorMsg: 'Sub Category is required'
       }
     },
   }
