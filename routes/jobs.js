@@ -43,11 +43,14 @@ jobs.get('/', async (req, res) => {
 
   const page = parseInt(req.query.page) - 1 || 0;
   const limit = parseInt(req.query.limit) || 9;
+  const postedById = req.query.postedById && {'postedById': req.query.postedById};
+  const userId = req.query.userId && {'postedById': {$ne :req.query.userId}}
   const total = await Jobs.countDocuments();
   const jobExpired = {'postedTill': {$gte: moment().format('YYYY-MM-DD')}} || '';
-
+  const query = {...userId, ...postedById}
   try {
-      const response = await Jobs.find().skip(page * limit).limit(limit);
+      const response = await Jobs.find(query)
+      // .skip(page * limit).limit(limit);
       console.log(response, 'response')
      return res.status(200).json({
       data: response,

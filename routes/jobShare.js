@@ -4,20 +4,24 @@ const jobShare = Router()
 
 const { JobShare } = require('../models/jobShare')
 
-jobShare.get('/', async (req, res) => {
-  try {
-    const response = await JobShare.find();
-     return res.status(200).json(response)
-    }
-   catch (error) {
-    return res.status(502).json({ errors: ['Some error occurred'] })
-  }
-})
+// jobShare.get('/', async (req, res) => {
+//   try {
+//     const response = await JobShare.find();
+//      return res.status(200).json(response)
+//     }
+//    catch (error) {
+//     return res.status(502).json({ errors: ['Some error occurred'] })
+//   }
+// })
 
-jobShare.get('/:id', async (req, res) => {
+jobShare.get('/', async (req, res) => {
+  const postedById = req.query.userId && {'sharedTo': req.query.userId};
+  const sharedById = req.query.sharedById && {'sharedById': req.query.sharedById};
+  
+  const query = {...postedById, ...sharedById}
   const { id } = req.params;
   try {
-    const response = await JobShare.find({sharedTo: id});
+    const response = await JobShare.find(query);
      return res.status(200).json(response)
     }
    catch (error) {

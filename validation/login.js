@@ -1,5 +1,5 @@
 module.exports = {
-    userName: {
+  mobileNumber: {
       required: {
         errorMsg: 'User name is required'
       },
