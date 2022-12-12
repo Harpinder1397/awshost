@@ -56,6 +56,7 @@ const userInfoSchema = new Schema({
   gender: optionalFieldString,
   // age: optionalFieldString,
   createdAt: optionalFieldString,
+  type: optionalFieldString,
   updatedAt: optionalFieldString,
   verified: optionalFieldBoolean,
 })
