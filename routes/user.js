@@ -131,8 +131,8 @@ user.get('/', async (req, res) => {
   const max =  req.query.experience && Math.max(...req.query.experience);
   console.log(max, 'req.query.experience 222');
   console.log(max, 'req.query.experience');
-  const experience = req.query.experience && {'experience':{ $gte: req.query.experience - 4 ,$lte: req.query.experience}};
-  const age = req.query.age && {'age':{$gte: [0] ,$lte: 2}};
+  const experience = req.query.experienceMinimum && {'experience':{ $gte: req.query.experienceMinimum ,$lte: req.query.experienceMaximum}};
+  const age = req.query.ageMinimum && {'age':{$gte: Number(req.query.ageMinimum) ,$lte: Number(req.query.ageMaximum)}};
   const gender = req.query.gender && {'gender': req.query.gender};
   const languages = req.query.languages && {'languages': req.query.languages};
   const category = req.query.category && {'category': new RegExp('^' + req.query.category + '$', 'i')};

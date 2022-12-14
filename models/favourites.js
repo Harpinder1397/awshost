@@ -5,6 +5,11 @@ const optionalStringDefObj = {
   type: String
 }
 
+const optionalFieldNumber= {
+  required : false, 
+  type: Number
+}
+
 // const optionalNumberObj = {
 //   required : false, 
 //   type: Number
@@ -21,6 +26,7 @@ const favouritesInfoSchema = new Schema({
     favName: optionalStringDefObj,
     favSubCategory: optionalStringDefObj,
     favThumbnail: optionalStringDefObj,
+    experience: optionalFieldNumber,
     createdAt: optionalStringDefObj,
 })
 

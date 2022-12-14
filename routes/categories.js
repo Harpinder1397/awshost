@@ -12,7 +12,7 @@ categories.get('/', async (req, res) => {
     return res.status(401).json({ errors: ['not authorised'] })
   }
   try {
-    const categories = await Categories.find(req.query)
+    const categories = await Categories.find().sort({value: 1})
     return res.status(200).json(categories)
   } catch (error) {
     return res.status(502).json({ errors: ['Some error occurred'] })
