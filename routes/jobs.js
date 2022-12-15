@@ -1,7 +1,6 @@
 const { Router } = require('express')
 const multer = require('multer');
 const path = require('path');
-const moment = require('moment')
 const jobs = Router()
 
 const { Jobs } = require('../models/jobs')
@@ -46,7 +45,6 @@ jobs.get('/', async (req, res) => {
   const postedById = req.query.postedById && {'postedById': req.query.postedById};
   const userId = req.query.userId && {'postedById': {$ne :req.query.userId}}
   const total = await Jobs.countDocuments();
-  const jobExpired = {'postedTill': {$gte: moment().format('YYYY-MM-DD')}} || '';
   const query = {...userId, ...postedById}
   try {
       const response = await Jobs.find(query)
