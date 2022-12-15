@@ -3,9 +3,7 @@
 # dependencies
 /node_modules
 /config.env
-*public/*
 /public
-public
 /.pnp
 .pnp.js
 
