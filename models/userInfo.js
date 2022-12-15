@@ -39,6 +39,8 @@ const userInfoSchema = new Schema({
   subCategory: optionalFieldString,
   languages: optionalFieldArray,
   tags: optionalFieldArray,
+  bestIn: optionalFieldArray,
+  country: optionalFieldString,
   state: optionalFieldString,
   city: optionalFieldString,
   dateOfBirth: optionalFieldString,
