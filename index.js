@@ -25,7 +25,7 @@ const countries = require('./routes/countries')
 const favourites = require('./routes/favourites')
 const thumbnails = require('./routes/thumbnails')
 dotenv.config({path: './config.env'});
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 // const PORT = 3000;
 
 mongoose.connect('mongodb+srv://Harpinder0:harpindersingh@cluster0.vl3kis6.mongodb.net/sell3cart?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false })
