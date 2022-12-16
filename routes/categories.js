@@ -25,7 +25,7 @@ categories.post("/", async (req, res) => {
     if (record.length) {
       res.status(400).json({
         errors: {
-          "duplicate category": "category with this name is already exist"
+          "message": "category with this name is already exist"
         },
       }) 
       throw new Error("category with this name is already exist")
@@ -103,4 +103,20 @@ categories.post('/:_id/tags', (req, res) => {
       console.log( error)
   }
 })
+
+categories.post('/:_id/filters', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    
+    Categories.findByIdAndUpdate({_id}, {$set:{
+        "filters" : req.body
+    }}, {new: true})
+    .then(() => res.status(200).json({ message: 'record updated successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
 module.exports = categories

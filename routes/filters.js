@@ -26,10 +26,10 @@ filters.post("/", async (req, res) => {
     if (record.length) {
       res.status(400).json({
         errors: {
-          "duplicate category": "category with this name is already exist"
+          "message": "filters with this name is already exist"
         },
       }) 
-      throw new Error("category with this name is already exist")
+      throw new Error("filters with this name is already exist")
     }
 
     const newCategoey = {...req.body, key: req.body.value.toLowerCase().replace(' ', '-')};
