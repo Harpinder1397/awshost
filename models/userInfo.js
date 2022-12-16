@@ -38,6 +38,7 @@ const userInfoSchema = new Schema({
   category: optionalFieldString,
   subCategory: optionalFieldString,
   languages: optionalFieldArray,
+  extraTalent: optionalFieldArray,
   tags: optionalFieldArray,
   bestIn: optionalFieldArray,
   country: optionalFieldString,

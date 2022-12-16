@@ -135,6 +135,7 @@ user.get('/', async (req, res) => {
   const age = req.query.ageMinimum && {'age':{$gte: Number(req.query.ageMinimum) ,$lte: Number(req.query.ageMaximum)}};
   const gender = req.query.gender && {'gender': req.query.gender};
   const languages = req.query.languages && {'languages': req.query.languages};
+  const bestIn = req.query.bestIn && {'bestIn': new RegExp('^' + req.query.bestIn + '$', 'i')};
   const category = req.query.category && {'category': new RegExp('^' + req.query.category + '$', 'i')};
   const subCategory = req.query.subCategory && {'subCategory': new RegExp('^' + req.query.subCategory + '$', 'i')};
   const tags = req.query.tags && {'tags': new RegExp('^' + req.query.tags + '$', 'i')};
@@ -165,7 +166,7 @@ user.get('/', async (req, res) => {
 	// 		.limit(limit);
 
     const query = {
-      ...gender, ...age, ...experience, ...languages,
+      ...gender, ...bestIn, ...age, ...experience, ...languages,
       ...category, ...subCategory, ...tags, ...city,
       ...state, ...fullName
     }
