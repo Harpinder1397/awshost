@@ -2,15 +2,15 @@ const { Router } = require('express')
 
 const countryExternalApi = Router()
 
-var config = {
-    method: 'get',
-    headers: { 
-      'apy-token': 'APT07BM9XhNLK4VBfm59sG1hMb2l3gqXNT6JVU45jxUHCO7bAJVI'
-    }
-  };
-
 countryExternalApi.get('/', async (req, res) => {
     try {
+      const config = {
+        method: 'get',
+        headers: { 
+          'apy-token': 'APT07BM9XhNLK4VBfm59sG1hMb2l3gqXNT6JVU45jxUHCO7bAJVI'
+        }
+      };
+    
       const apiResponse = await fetch(
        'https://api.apyhub.com/data/dictionary/country', config)
       const apiResponseJson = await apiResponse.json()
