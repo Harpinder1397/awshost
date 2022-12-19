@@ -15,6 +15,8 @@ const loginRouter = require('./routes/login')
 const jobs = require('./routes/jobs')
 const jobShare = require('./routes/jobShare')
 const user = require('./routes/user')
+const countryExternalApi = require('./routes/countryExternalApi')
+const stateExternalApi = require('./routes/stateExternalApi')
 // const account = require('./routes/account')
 const uploadApi = require('./routes/upload');
 const getAllStates = require('./routes/states')
@@ -51,6 +53,8 @@ app.use(express.static('public'));
 
 app.use('/login', loginRouter)
 app.use('/user', user)
+app.use('/country', countryExternalApi)
+app.use('/state', stateExternalApi)
 // app.use('/account', account)
 app.use('/upload', uploadApi)
 app.use('/categories', categories)
