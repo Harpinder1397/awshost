@@ -53,7 +53,7 @@ app.use(express.static('public'));
 
 app.use('/login', loginRouter)
 app.use('/user', user)
-app.use('/country', countryExternalApi)
+app.use('/dictionary/countries', countryExternalApi)
 app.use('/state', stateExternalApi)
 // app.use('/account', account)
 app.use('/upload', uploadApi)
