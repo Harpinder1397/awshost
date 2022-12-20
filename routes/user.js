@@ -127,15 +127,18 @@ user.get('/', async (req, res) => {
   // console.log([...Array(max).keys()], '[...Array(10).keys()]')
 
   console.log(req.query.experience, 'req.query.experience')
-  const min =  req.query.experience && Math.min(...req.query.experience);
-  const max =  req.query.experience && Math.max(...req.query.experience);
-  console.log(max, 'req.query.experience 222');
-  console.log(max, 'req.query.experience');
   const experience = req.query.experienceMinimum && {'experience':{ $gte: req.query.experienceMinimum ,$lte: req.query.experienceMaximum}};
   const age = req.query.ageMinimum && {'age':{$gte: Number(req.query.ageMinimum) ,$lte: Number(req.query.ageMaximum)}};
+  const budget = req.query.budgetMinimum && {'budget':{$gte: Number(req.query.budgetMinimum) ,$lte: Number(req.query.budgetMaximum)}};
+  const height = req.query.heightMinimum && {'height':{$gte: Number(req.query.heightMinimum) ,$lte: Number(req.query.heightMaximum)}};
+  const weight = req.query.weightMinimum && {'weight':{$gte: Number(req.query.weightMinimum) ,$lte: Number(req.query.weightMaximum)}};
   const gender = req.query.gender && {'gender': req.query.gender};
   const languages = req.query.languages && {'languages': req.query.languages};
   const bestIn = req.query.bestIn && {'bestIn': new RegExp('^' + req.query.bestIn + '$', 'i')};
+  const extraTalent = req.query.extraTalent && {'extraTalent': new RegExp('^' + req.query.extraTalent + '$', 'i')};
+  const eyeColor = req.query.eyeColor && {'eyes': new RegExp('^' + req.query.eyeColor + '$', 'i')};
+  const hairColor = req.query.hairColor && {'hair': new RegExp('^' + req.query.hairColor + '$', 'i')};
+  const skinTone = req.query.skinTone && {'skin': new RegExp('^' + req.query.skinTone + '$', 'i')};
   const category = req.query.category && {'category': new RegExp('^' + req.query.category + '$', 'i')};
   const subCategory = req.query.subCategory && {'subCategory': new RegExp('^' + req.query.subCategory + '$', 'i')};
   const tags = req.query.tags && {'tags': new RegExp('^' + req.query.tags + '$', 'i')};
@@ -168,7 +171,9 @@ user.get('/', async (req, res) => {
     const query = {
       ...gender, ...bestIn, ...age, ...experience, ...languages,
       ...category, ...subCategory, ...tags, ...city,
-      ...state, ...fullName
+      ...state, ...fullName, ...extraTalent, ...eyeColor,
+      ...hairColor, ...skinTone, ...budget, ...height,
+      ...weight
     }
     const total = await User.countDocuments();
 
