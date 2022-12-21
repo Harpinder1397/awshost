@@ -145,6 +145,7 @@ user.get('/', async (req, res) => {
   const tags = req.query.tags && {'tags': new RegExp('^' + req.query.tags + '$', 'i')};
   const city = req.query.city && {'city': new RegExp('^' + req.query.city + '$', 'i')};
   const state = req.query.state && {'state': new RegExp('^' + req.query.state + '$', 'i')};
+  const country = req.query.country && {'country': new RegExp('^' + req.query.country + '$', 'i')};
   // const userName = req.query.userName && {'userName': new RegExp('^' + req.query.userName.split(",") + '$', 'i')};
   const fullName = req.query.fullName && {fullName: {$regex: req.query.fullName, $options: "i"}}
   const page = parseInt(req.query.page) - 1 || 0;
@@ -174,7 +175,7 @@ user.get('/', async (req, res) => {
       ...category, ...subCategory, ...tags, ...city,
       ...state, ...fullName, ...extraTalent, ...eyeColor,
       ...hairColor, ...skinTone, ...budget, ...height,
-      ...weight, ...available
+      ...weight, ...available, ...country
     }
     const total = await User.countDocuments();
 
