@@ -136,6 +136,7 @@ user.get('/', async (req, res) => {
   const languages = req.query.languages && {'languages': req.query.languages};
   const bestIn = req.query.bestIn && {'bestIn': new RegExp('^' + req.query.bestIn + '$', 'i')};
   const extraTalent = req.query.extraTalent && {'extraTalent': new RegExp('^' + req.query.extraTalent + '$', 'i')};
+  const available = req.query.available && {'available': new RegExp('^' + req.query.available + '$', 'i')};
   const eyeColor = req.query.eyeColor && {'eyes': new RegExp('^' + req.query.eyeColor + '$', 'i')};
   const hairColor = req.query.hairColor && {'hair': new RegExp('^' + req.query.hairColor + '$', 'i')};
   const skinTone = req.query.skinTone && {'skin': new RegExp('^' + req.query.skinTone + '$', 'i')};
@@ -173,7 +174,7 @@ user.get('/', async (req, res) => {
       ...category, ...subCategory, ...tags, ...city,
       ...state, ...fullName, ...extraTalent, ...eyeColor,
       ...hairColor, ...skinTone, ...budget, ...height,
-      ...weight
+      ...weight, ...available
     }
     const total = await User.countDocuments();
 

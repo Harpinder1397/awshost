@@ -62,6 +62,7 @@ const userInfoSchema = new Schema({
   type: optionalFieldString,
   updatedAt: optionalFieldString,
   verified: optionalFieldBoolean,
+  available: optionalFieldString,
 })
 
 const User = new model('User', userInfoSchema)
