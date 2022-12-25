@@ -44,8 +44,13 @@ jobs.get('/', async (req, res) => {
   const limit = parseInt(req.query.limit) || 9;
   const postedById = req.query.postedById && {'postedById': req.query.postedById};
   const userId = req.query.userId && {'postedById': {$ne :req.query.userId}}
+  const city = req.query.city && {'city': new RegExp('^' + req.query.city + '$', 'i')};
+  const state = req.query.state && {'state': new RegExp('^' + req.query.state + '$', 'i')};
+  const country = req.query.country && {'country': new RegExp('^' + req.query.country + '$', 'i')};
+  const budget = req.query.budgetMinimum && {'budget':{$gte: Number(req.query.budgetMinimum) ,$lte: Number(req.query.budgetMaximum)}};
   const total = await Jobs.countDocuments();
-  const query = {...userId, ...postedById}
+  const query = {...userId, ...postedById, ...city, ...state, ...country, ...budget}
+
   try {
       const response = await Jobs.find(query)
       // .skip(page * limit).limit(limit);
