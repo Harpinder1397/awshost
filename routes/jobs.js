@@ -45,11 +45,13 @@ jobs.get('/', async (req, res) => {
   const postedById = req.query.postedById && {'postedById': req.query.postedById};
   const userId = req.query.userId && {'postedById': {$ne :req.query.userId}}
   const city = req.query.city && {'city': new RegExp('^' + req.query.city + '$', 'i')};
+  const category = req.query.category && {'postedByCategory': new RegExp('^' + req.query.category + '$', 'i')};
+  const subCategory = req.query.subCategory && {'postedBySubCategory': new RegExp('^' + req.query.subCategory + '$', 'i')};
   const state = req.query.state && {'state': new RegExp('^' + req.query.state + '$', 'i')};
   const country = req.query.country && {'country': new RegExp('^' + req.query.country + '$', 'i')};
   const budget = req.query.budgetMinimum && {'budget':{$gte: Number(req.query.budgetMinimum) ,$lte: Number(req.query.budgetMaximum)}};
   const total = await Jobs.countDocuments();
-  const query = {...userId, ...postedById, ...city, ...state, ...country, ...budget}
+  const query = {...userId, ...postedById, ...city, ...state, ...country, ...budget, ...category, ...subCategory}
 
   try {
       const response = await Jobs.find(query)
