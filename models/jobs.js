@@ -36,6 +36,7 @@ const jobsInfoSchema = new Schema({
   postedById: requiredStringDefObj,
   postedByName: requiredStringDefObj,
   postedByCategory: requiredStringDefObj,
+  postedBySubCategory: requiredStringDefObj,
   postedOn: requiredStringDefObj,
   postedTill: requiredStringDefObj,
   requirement: requiredNumberObj,
