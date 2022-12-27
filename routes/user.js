@@ -149,7 +149,7 @@ user.get('/', async (req, res) => {
   // const userName = req.query.userName && {'userName': new RegExp('^' + req.query.userName.split(",") + '$', 'i')};
   const fullName = req.query.fullName && {fullName: {$regex: req.query.fullName, $options: "i"}}
   const page = parseInt(req.query.page) - 1 || 0;
-	const limit = parseInt(req.query.limit) || 1000;
+	const limit = parseInt(req.query.limit) || 30;
   
 
   // sort 
