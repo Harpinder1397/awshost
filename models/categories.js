@@ -22,6 +22,8 @@ const categoriesInfoSchema = new Schema({
     createdAt: optionalStringDefObj,
     tags: optionalArrayObj,
     filters: optionalArrayObj,
+    bestIn: optionalArrayObj,
+    extraTalent: optionalArrayObj,
     childern: optionalArrayObj,
 })
 

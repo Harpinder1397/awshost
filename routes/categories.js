@@ -104,6 +104,37 @@ categories.post('/:_id/tags', (req, res) => {
   }
 })
 
+categories.post('/:_id/best-in', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    
+    Categories.findByIdAndUpdate({_id}, {$set:{
+        "bestIn" : req.body
+    }}, {new: true})
+    .then(() => res.status(200).json({ message: 'record updated successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
+categories.post('/:_id/extra-talent', (req, res) => {
+  const { _id = "",  } = req.params
+  console.log(_id, '_id_id_id_id_id_id_id')
+  try {
+    
+    Categories.findByIdAndUpdate({_id}, {$set:{
+        "extraTalent" : req.body
+    }}, {new: true})
+    .then(() => res.status(200).json({ message: 'record updated successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
 categories.post('/:_id/filters', (req, res) => {
   const { _id = "",  } = req.params
   try {
