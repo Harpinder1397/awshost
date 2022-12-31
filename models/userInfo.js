@@ -36,6 +36,7 @@ const userInfoSchema = new Schema({
   password: requiredStringDefObj,
   email: optionalFieldString,
   category: optionalFieldString,
+  categoryId: optionalFieldString,
   subCategory: optionalFieldString,
   languages: optionalFieldArray,
   extraTalent: optionalFieldArray,
