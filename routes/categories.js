@@ -107,7 +107,7 @@ categories.post('/:_id/tags', (req, res) => {
 categories.post('/:_id/best-in', (req, res) => {
   const { _id = "",  } = req.params
   try {
-    
+
     Categories.findByIdAndUpdate({_id}, {$set:{
         "bestIn" : req.body
     }}, {new: true})
