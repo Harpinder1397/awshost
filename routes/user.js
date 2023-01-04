@@ -217,14 +217,80 @@ user.get('/:userId', async (req, res) => {
   }
 })
 
+// user.post('/:_id/projects', (req, res) => {
+//   const { _id = '',  } = req.params
+//   try {
+//     // userDetail
+//     User.findByIdAndUpdate({_id}, {$set:{
+//         "projects" : req.body
+//     }}, {new: true})
+//     .then(() => res.status(200).json({ message: 'record updated successfully', data: {...req.body}  }))
+//     .catch(error => console.log(error))
+//   }
+//   catch(error){
+//       console.log( error)
+//   }
+// })
+
 user.post('/:_id/projects', (req, res) => {
-  const { _id = '',  } = req.params
+  const { _id = "",  } = req.params
   try {
-    // userDetail
-    User.findByIdAndUpdate({_id}, {$set:{
+    User.updateOne({_id},
+    {$addToSet: {
+      "projects": req.body
+    }},{})
+    .then(() => res.status(200).json({ message: 'record add successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
+user.post('/:_id/project/update/:id', (req, res) => {
+  const { _id = "", id } = req.params
+  try {
+    User.updateOne({
+      _id : _id,
+      "projects._id": Number(id)
+    },
+    {$set: {
+      "projects.$.category" : req.body.category,
+      "projects.$.links" : req.body.links,
+      "projects.$.projectName" : req.body.projectName,
+      "projects.$.subCategory" : req.body.subCategory,
+      "projects.$._id" : req.body._id
+    }},{})
+    .then(() => res.status(200).json({ message: 'record update successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
+user.post('/:_id/project/delete', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    
+    User.findByIdAndUpdate({_id}, {
         "projects" : req.body
+    }, {new: true})
+    .then(() => res.status(200).json({ message: 'record delete successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
+user.post('/:_id/thumbnail', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    User.findByIdAndUpdate({_id}, {$set:{
+        "thumbnails" : req.body
     }}, {new: true})
-    .then(() => res.status(200).json({ message: 'record updated successfully', data: {...req.body}  }))
+    .then(() => res.status(200).json({ message: 'record add successfully', data: {...req.body}  }))
     .catch(error => console.log(error))
   }
   catch(error){
@@ -235,11 +301,14 @@ user.post('/:_id/projects', (req, res) => {
 user.post('/:_id/thumbnails', (req, res) => {
   const { _id = "",  } = req.params
   try {
-    
-    User.findByIdAndUpdate({_id}, {$set:{
-        "thumbnails" : req.body
-    }}, {new: true})
-    .then(() => res.status(200).json({ message: 'record updated successfully', data: {...req.body}  }))
+    User.updateOne({_id},
+    {$addToSet: {
+      "thumbnails": req.body
+    }},{})
+    // User.findByIdAndUpdate({_id}, {$set:{
+    //     "thumbnails" : req.body
+    // }}, {new: true})
+    .then(() => res.status(200).json({ message: 'record add successfully', data: {...req.body}  }))
     .catch(error => console.log(error))
   }
   catch(error){
