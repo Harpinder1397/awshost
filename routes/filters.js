@@ -52,7 +52,7 @@ filters.post("/", async (req, res) => {
 filters.post('/:_id', (req, res) => {
   const { _id = "",  } = req.params
   try {
-    Filters.findByIdAndUpdate(_id, {...req.body, key: req.body.value.toLowerCase().replace(' ', '-')}, {new: true})
+    Filters.findByIdAndUpdate(_id, {...req.body}, {new: true})
         .then(() => res.status(200).json({ message: 'record updated successfully', data: {...req.body}  }))
         .catch(error => console.log(error))
   }
