@@ -48,6 +48,8 @@ const userInfoSchema = new Schema({
   dateOfBirth: optionalFieldString,
   experience: optionalFieldNumber,
   projects: optionalFieldArray,
+  audition:optionalFieldArray,
+  showreel:optionalFieldArray,
   thumbnails: optionalFieldArray,
   bio: optionalFieldString,
   hair: optionalFieldString,
