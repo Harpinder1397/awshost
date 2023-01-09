@@ -316,6 +316,66 @@ user.post('/:_id/thumbnails', (req, res) => {
   }
 })
 
+user.post('/:_id/audition', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    User.updateOne({_id},
+    {$addToSet: {
+      "audition": req.body
+    }},{})
+    .then(() => res.status(200).json({ message: 'record add successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
+user.post('/:_id/audition/delete', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    
+    User.findByIdAndUpdate({_id}, {
+        "audition" : req.body
+    }, {new: true})
+    .then(() => res.status(200).json({ message: 'record delete successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
+user.post('/:_id/showreel', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    User.updateOne({_id},
+    {$addToSet: {
+      "showreel": req.body
+    }},{})
+    .then(() => res.status(200).json({ message: 'record add successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
+user.post('/:_id/showreel/delete', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    
+    User.findByIdAndUpdate({_id}, {
+        "showreel" : req.body
+    }, {new: true})
+    .then(() => res.status(200).json({ message: 'record delete successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
 
 // // login google auth
 
