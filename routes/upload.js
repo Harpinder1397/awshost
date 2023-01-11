@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
   // Check File Type
   function checkFileType(file, cb){
     // Allowed ext
-    const filetypes = /jpeg|jpg|png|gif/;
+    const filetypes = /jpeg|jpg|webp|png|gif/;
     // Check ext
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     // Check mime
@@ -38,6 +38,29 @@ const storage = multer.diskStorage({
     }
   }
   
+   // Init Upload
+   const uploadVideo = multer({
+    storage: storage,
+    // limits:{fileSize: 1000000},
+    fileFilter: function(req, file, cb){
+      checkVideoFileType(file, cb);
+    }
+  }).single('videoUploader');
+
+  function checkVideoFileType(file, cb){
+    // Allowed ext
+    const filetypes = /mp4|mov|avi|wmv|mkv|webm|avchd/;
+    // Check ext
+    const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
+    // Check mime
+    const mimetype = filetypes.test(file.mimetype);
+  
+    if(mimetype && extname){
+      return cb(null,true);
+    } else {
+      cb('Error: Images Only!');
+    }
+  }
 //   // EJS
 //   app.set('view engine', 'ejs');
   
@@ -62,7 +85,7 @@ uploading.post('/:userId', (req, res) => {
     });
   });
 
-  uploading.delete('/delete', (req, res) => {
+uploading.delete('/delete', (req, res) => {
     const { url } = req.query;
     const path = url.replace('http://node-env.eba-xnwspbk7.ap-northeast-1.elasticbeanstalk.com', 'public')
     fs.unlink(path, (err) => {
@@ -72,5 +95,34 @@ uploading.post('/:userId', (req, res) => {
       res.status(200).json({ success: true, status: 200 })
     });
   });
+
+// video 
+uploading.post('/video/:userId', (req, res) => {
+  const { userId } = req.params;
+    uploadVideo(req, res, (err) => {
+      if(err){
+        res.status(403).json({ errors: err })
+      } else {
+        if(req.file == undefined){
+            res.status(402).json({ errors: ['No file selectd'] })
+        } else {
+            const thumbnail = req.file.path.replace('public', 'http://node-env.eba-xnwspbk7.ap-northeast-1.elasticbeanstalk.com');
+            res.send(thumbnail);
+        }
+      }
+    });
+});
+
+uploading.delete('/video/delete', (req, res) => {
+  const { url } = req.query;
+  const path = url.replace('http://node-env.eba-xnwspbk7.ap-northeast-1.elasticbeanstalk.com', 'public')
+  fs.unlink(path, (err) => {
+    if (err) {
+      res.status(400).json({ error: 'something went wrong' })
+    }
+    res.status(200).json({ success: true, status: 200 })
+  });
+});
+ 
 module.exports = uploading
   
