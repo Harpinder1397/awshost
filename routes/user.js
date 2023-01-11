@@ -361,6 +361,20 @@ user.post('/:_id/showreel', (req, res) => {
   }
 })
 
+user.post('/:_id/showreel/replace', (req, res) => {
+  const { _id = "",  } = req.params
+  try {
+    User.findByIdAndUpdate({_id}, {$set:{
+        "showreel" : req.body
+    }}, {new: true})
+    .then(() => res.status(200).json({ message: 'record replace successfully', data: {...req.body}  }))
+    .catch(error => console.log(error))
+  }
+  catch(error){
+      console.log( error)
+  }
+})
+
 user.post('/:_id/showreel/delete', (req, res) => {
   const { _id = "",  } = req.params
   try {
