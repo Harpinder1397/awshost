@@ -49,7 +49,7 @@ const storage = multer.diskStorage({
 
   function checkVideoFileType(file, cb){
     // Allowed ext
-    const filetypes = /mp4|mov|avi|wmv|mkv|webm|avchd/;
+    const filetypes = /mp4|mov|avi|wmv|mkv|webm/;
     // Check ext
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     // Check mime
@@ -106,7 +106,7 @@ uploading.post('/video/:userId', (req, res) => {
         if(req.file == undefined){
             res.status(402).json({ errors: ['No file selectd'] })
         } else {
-            const thumbnail = req.file.path.replace('public', 'http://node-env.eba-xnwspbk7.ap-northeast-1.elasticbeanstalk.com');
+            const thumbnail = req.file.path.replace('public', 'http://localhost:3000');
             res.send(thumbnail);
         }
       }
@@ -115,7 +115,7 @@ uploading.post('/video/:userId', (req, res) => {
 
 uploading.delete('/video/delete', (req, res) => {
   const { url } = req.query;
-  const path = url.replace('http://node-env.eba-xnwspbk7.ap-northeast-1.elasticbeanstalk.com', 'public')
+  const path = url.replace('http://localhost:3000', 'public')
   fs.unlink(path, (err) => {
     if (err) {
       res.status(400).json({ error: 'something went wrong' })
