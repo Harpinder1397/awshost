@@ -308,7 +308,7 @@ user.post('/:_id/thumbnails', (req, res) => {
     // User.findByIdAndUpdate({_id}, {$set:{
     //     "thumbnails" : req.body
     // }}, {new: true})
-    .then(() => res.status(200).json({ message: 'record add successfully', data: {...req.body}  }))
+    .then(() => res.status(200).json({ message: 'record add image successfully', data: {...req.body} }))
     .catch(error => console.log(error))
   }
   catch(error){
