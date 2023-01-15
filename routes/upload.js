@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
   // Check File Type
   function checkFileType(file, cb){
     // Allowed ext
-    const filetypes = /jpeg|jpg|webp|png|gif|mp4|mov|avi|wmv|mkv|webm/;
+    const filetypes = /jpeg|jpg|webp|png|gif/;
     // Check ext
     const extname = filetypes.test(path.extname(file.originalname).toLowerCase());
     // Check mime
@@ -38,9 +38,17 @@ const storage = multer.diskStorage({
     }
   }
   
+  
+  const videoStorage = multer.diskStorage({
+    destination: './public/uploads/videos',
+    filename: function(req, file, cb){
+      cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+  });
+
    // Init Upload
    const uploadVideo = multer({
-    storage: storage,
+    storage: videoStorage,
     // limits:{fileSize: 1000000},
     fileFilter: function(req, file, cb){
       checkVideoFileType(file, cb);
